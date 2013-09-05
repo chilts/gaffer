@@ -1,8 +1,8 @@
 // ----------------------------------------------------------------------------
 //
+// gaffer.js - The boss ... helps you install things.
 //
-//
-//
+// Copyright 2013 Andrew Chilton.  All rights reserved.
 //
 // ----------------------------------------------------------------------------
 
@@ -62,7 +62,7 @@ module.exports = function(dir) {
                         }
                         else {
                             lines = data.split("\n").filter(function(line) {
-                                return line.match(/\S/);
+                                return line.match(/\S/) && !line.match(/^\s*#/);
                             });
                         }
 
@@ -78,7 +78,10 @@ module.exports = function(dir) {
                 }
             },
             function(err) {
-                if (err) throw err;
+                if (err) {
+                    console.warn(err);
+                    process.exit(2);
+                }
             }
         );
 
